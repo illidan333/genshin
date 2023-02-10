@@ -45,7 +45,7 @@ Func WindowSise()
    WinActivate($gi)
    Sleep(1000)
    $aWin_Pos = WinGetPos("[ACTIVE]")
-   If $aWin_Pos[3] == @DesktopWidth And $aWin_Pos[3] == @DesktopHeight Then
+   If $aWin_Pos[3] = @DesktopWidth And $aWin_Pos[3] = @DesktopHeight Then
 	  Send("!+{Enter}")
    EndIf
 EndFunc   ;==>WindowSise
@@ -128,19 +128,24 @@ EndFunc   ;==>StartGenshin
 
 ;This function waits until the yellow email to show up and then click on it.
 Func ClickEmail()
-   waitTil2(957, 1048, 0xFFE14B, 1827, 910, 0x222222)
+   ToolTip("waiting up to nine minutes for the email to show up",0,0)
+   waitTil2(957, 1048, 0xFFE14B, 1827, 910, 0x222222, 1000*60*9)
    clk(956, 546)
+   ToolTip("",0,0)
 EndFunc   ;==>ClickEmail
 
 ;This function waits until the start game button to show up and then click on it.
 Func StartGame()
-   waitTil2(999, 1042, 0xFFFFFF, 1833, 842, 0xFFFFFF)
+   ToolTip("waiting up to nine minutes for the start game UI to show up",0,0)
+   waitTil2(999, 1042, 0xFFFFFF, 1833, 842, 0xFFFFFF, 1000*60*9)
    clk(958, 1048)
+   ToolTip("",0,0)
 EndFunc   ;==>StartGame
 
 ;This function waits until the yueka UI shows up or the game fully starts. It will take a screenshot and collect yueka if needed
 Func waitTilGamefinishsLoading()
-   waitTil2Or(968, 520, 0x4D5F90, 75, 52, 0xE8C28E)
+   ToolTip("waiting up to nine minutes for the game to load",0,0)
+   waitTil2Or(968, 520, 0x4D5F90, 75, 52, 0xE8C28E, 1000*60*9)
    If isColor(968, 520, 0x4D5F90) Then
 	  clk(968, 520)
 	  clk(968, 520)
@@ -150,10 +155,10 @@ EndFunc   ;==>waitTilGamefinishsLoading
 
 ;This function close the game and then close the launcher
 Func endGame()
-   ToolTip("Exiting the game in 10 seconds",900,0)
+   ToolTip("Exiting the game in 10 seconds",0,0)
    Sleep(1000 * 10)
    Send("!+{F4}")
-   ToolTip("waiting for the launcher to show up",900,0)
+   ToolTip("waiting for the launcher to show up",0,0)
    waitTil(1260, 768, 0xFFC507)
    clk(1568, 130)
    Sleep(1000)
