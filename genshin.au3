@@ -9,7 +9,7 @@ HotKeySet("{ESC}", "TogglePause")
 Sleep(2000)
 
 StartGenshin()
-WindowSise()
+WindowSize()
 ClickEmail()
 StartGame()
 waitTilGamefinishsLoading()
@@ -34,21 +34,25 @@ Func FullScreen()
    WinActivate($gi)
    $aWin_Pos = WinGetPos("[ACTIVE]")
    Sleep(1000)
-   If $aWin_Pos[3] <> @DesktopWidth Or $aWin_Pos[3] <> @DesktopHeight Then
+   If $aWin_Pos[2] <> @DesktopWidth Or $aWin_Pos[3] <> @DesktopHeight Then
 	  Send("!+{Enter}")
    EndIf
 EndFunc   ;==>FullScreen
 
 ;This function change the game into the window size
-Func WindowSise()
+Func WindowSize()
+   ToolTip("waiting for up to 2 mins for the game to load",0,0)
+   waitTil2(1816, 998, 0x222222, 1806, 996, 0xFFFFFF, 2 * 60 * 1000)
+   ToolTip("changing to window size if needed",0,0)
    $gi = WinWait("[CLASS:UnityWndClass]", "", 150);wait up to 150 sec until the program to start
    WinActivate($gi)
    Sleep(1000)
    $aWin_Pos = WinGetPos("[ACTIVE]")
-   If $aWin_Pos[3] = @DesktopWidth And $aWin_Pos[3] = @DesktopHeight Then
+   If $aWin_Pos[2] = @DesktopWidth And $aWin_Pos[3] = @DesktopHeight Then
 	  Send("!+{Enter}")
    EndIf
-EndFunc   ;==>WindowSise
+   ToolTip("",0,0)
+EndFunc   ;==>WindowSize
 
 ;This function clicks on a certain pixel
 Func clk($x,$y,$msg="",$clr=0)
@@ -122,6 +126,7 @@ EndFunc   ;==>waitTil
 Func StartGenshin()
    Run("D:\NA Genshin Impact\Genshin Impact\launcher.exe");start the program
    waitTil(1260, 768, 0xFFC507)
+   Sleep(1000)
    MouseMove(1261, 769, "launch the game")
    clk(1260, 768, "launch the game")
 EndFunc   ;==>StartGenshin
@@ -155,8 +160,9 @@ EndFunc   ;==>waitTilGamefinishsLoading
 
 ;This function close the game and then close the launcher
 Func endGame()
-   ToolTip("Exiting the game in 10 seconds",0,0)
-   Sleep(1000 * 10)
+   ToolTip("Exiting the game in 3 seconds",0,0)
+   Beep(1000)
+   Sleep(1000 * 3)
    Send("!+{F4}")
    ToolTip("waiting for the launcher to show up",0,0)
    waitTil(1260, 768, 0xFFC507)
