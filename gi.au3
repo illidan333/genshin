@@ -14,9 +14,9 @@ ClickEmail()
 StartGame()
 waitTilGamefinishsLoading()
 FullScreen()
-endGame()
+;endGame()
 
-Shutdown($SD_STANDBY)
+;Shutdown($SD_STANDBY)
 Exit
 
 Func isColor($positionX, $positionY, $color, $variation = 5)
