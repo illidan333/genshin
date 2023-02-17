@@ -14,6 +14,7 @@ ClickEmail()
 StartGame()
 waitTilGamefinishsLoading()
 FullScreen()
+debugScreenshot()
 endGame()
 
 Shutdown($SD_STANDBY)
@@ -27,6 +28,15 @@ Func isColor($positionX, $positionY, $color, $variation = 5)
    EndIf
    return False
 EndFunc
+
+;This function takes a screenshot for debugging
+Func debugScreenshot()
+   $gi = WinWait("[CLASS:UnityWndClass]", "", 150);wait up to 150 sec until the program to start
+   $date = _DateTimeFormat(_NowCalc(), 1)
+   $time = _DateTimeFormat(_NowCalc(), 3)
+   $time = StringReplace($time, ":", "-");windows file name cannot contain the ":" character
+   _ScreenCapture_CaptureWnd("D:\fun\sgs\debugScreenshot\questCollectDebug "&$time&" "&$date&".jpg", $gi)
+EndFunc   ;==>debugScreenshot
 
 ;This function change the game into the full screen mode
 Func FullScreen()
@@ -198,14 +208,6 @@ Func clkExpect($x, $y, $msg, $expectX, $expectY, $color)
    If Not isColor($expectX, $expectY, $color) Then
 	  clk($x, $y, "retrying "&$msg)
    EndIf
-EndFunc
-
-Func debugScreenshot()
-   $sgsHandler = WinWait($chromeTitle, "", 100)
-   $date = _DateTimeFormat(_NowCalc(), 1)
-   $time = _DateTimeFormat(_NowCalc(), 3)
-   $time = StringReplace($time, ":", "-");windows file name cannot contain the ":" character
-   _ScreenCapture_CaptureWnd("D:\fun\sgs\debugScreenshot\questCollectDebug "&$time&" "&$date&".jpg", $sgsHandler)
 EndFunc
 
 Func consoleClientLogin($path, $choujiang=False)
