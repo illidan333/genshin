@@ -134,7 +134,7 @@ EndFunc   ;==>StartGenshin
 ;This function waits until the yellow email to show up and then click on it.
 Func ClickEmail()
    ToolTip("waiting up to nine minutes for the email(account name) to show up",0,0)
-   waitTil2(1011, 1050, 0xFFE14B, 1827, 910, 0x222222, 1000*60*9)
+   waitTil2(952, 1045, 0xFFE14B, 1827, 910, 0x222222, 1000*60*9)
 
    clk(956, 546)
    ToolTip("",0,0)
